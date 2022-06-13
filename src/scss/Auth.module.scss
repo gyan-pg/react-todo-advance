@@ -1,0 +1,34 @@
+@import "./Reset.scss";
+@import "./Variables.scss";
+
+.container {
+  position: relative;
+  margin: 0 auto;
+  width: 500px;
+  top: 20vh;
+  background: #eee;
+}
+.input {
+  width: 100%;
+  display: block;
+  border: $border_default;
+  padding: $space_s $space_m;
+  margin-bottom: $space_m;
+}
+.title {
+  text-align: center;
+  font-size: $fontsize_2l;
+}
+.login_button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #ababff;
+  color: white;
+  padding: $space_s;
+  margin-bottom: $space_sm;
+  &__disable {
+    @extend .login_button;
+    background: #aaa;
+  }
+}
