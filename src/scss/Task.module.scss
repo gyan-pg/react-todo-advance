@@ -1,0 +1,16 @@
+@import "./Reset.scss";
+@import "./Variables.scss";
+
+.wrapper {
+
+}
+
+.button {
+  background: green;
+  color: white;
+  padding: $space_xs;
+  margin-right: $space_xs;
+  &:hover {
+    cursor: pointer;
+  }
+}

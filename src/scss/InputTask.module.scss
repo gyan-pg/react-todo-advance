@@ -1,0 +1,13 @@
+@import "./Reset.scss";
+@import "./Variables.scss";
+
+.input {
+  padding: $space_s;
+  width: 50vw;
+  border: $border_default;
+  display: block;
+}
+.submit_button {
+  padding: $space_s;
+  border: $border_default;
+}

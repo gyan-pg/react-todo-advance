@@ -29,7 +29,6 @@ const App: React.FC = () => {
     return () => unSub();
   }, [dispatch]);
 
-
   return (
     <>
       {user.uid ? (

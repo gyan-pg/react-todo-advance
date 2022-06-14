@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 
+interface USER {
+  displayName: string;
+  photoUrl: string;
+}
+
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -22,11 +27,15 @@ export const userSlice = createSlice({
         displayName: "",
       };
     },
+    updateUserProfile: (state, action: PayloadAction<USER>) => {
+      state.user.displayName = action.payload.displayName;
+      state.user.photoUrl = action.payload.photoUrl;
+    },
   },
 });
 
 // actionsはreducersの中身をexportする。ついでにaction creatorの役割も担っている。
-export const { login, logout } = userSlice.actions;
+export const { login, logout, updateUserProfile } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user.user;
 
