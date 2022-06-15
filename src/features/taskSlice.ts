@@ -1,5 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+// firebase
 import { RootState } from '../app/store';
+import { db } from "../firebase";
+import { doc, deleteDoc, updateDoc, addDoc, collection } from "firebase/firestore";
+// const
+import { FirstPhase, SecondPhase, ThirdPhase } from "../status";
 
 interface TASK {
   id: string,
@@ -12,33 +18,56 @@ interface TASK {
 export const taskSlice = createSlice({
   name: 'task',
   initialState: {
-    tasks: []
+    tasks: [],
+    modalTaskFlg: false,
+    clickedTaskId: "",
   },
 
   reducers: {
-    setTasks: (state, action) => {
+    exSetTasks: (state, action) => {
       state.tasks = action.payload;
-    }
-    // login: (state, action) => {
-    //   state.user = action.payload;
-    // },
-    // logout: (state) => {
-    //   state.user = {
-    //     uid: "",
-    //     photoUrl: "",
-    //     displayName: "",
-    //   };
-    // },
-    // updateUserProfile: (state, action: PayloadAction<USER>) => {
-    //   state.user.displayName = action.payload.displayName;
-    //   state.user.photoUrl = action.payload.photoUrl;
-    // },
+    },
+    exCreateTask: (state, action) => {
+      console.log(action.payload);
+      const colRef = collection(db, 'tasks');
+      const data = {
+        user: action.payload.user,
+        uid: action.payload.uid,
+        title: action.payload.title,
+        detail: action.payload.detail,
+        status: action.payload.status
+      };
+      addDoc(colRef, data);
+    },
+    exDeleteTask: (state, action) => {
+      console.log('delete task',action.payload)
+      deleteDoc(doc(db, "tasks", action.payload.uid));
+    },
+    exChangeStatus: (state, action) => {
+      let newStatus = "";
+      if (action.payload.status === FirstPhase) newStatus = SecondPhase;
+      if (action.payload.status === SecondPhase) newStatus = ThirdPhase;
+  
+      const taskRef = doc(db, "tasks", action.payload.id);
+  
+      updateDoc(taskRef, {
+        status: newStatus,
+      });
+    },
+    exSetModalTaskFlg: (state) => {
+      state.modalTaskFlg = !state.modalTaskFlg;
+    },
+    exSetClickedTaskId: (state, action) => {
+      state.clickedTaskId = action.payload.id;
+    },
   },
 });
 
 // actionsはreducersの中身をexportする。ついでにaction creatorの役割も担っている。
-export const { setTasks } = taskSlice.actions;
+export const { exSetTasks, exCreateTask, exDeleteTask, exChangeStatus, exSetClickedTaskId, exSetModalTaskFlg } = taskSlice.actions;
 
 export const selectTasks = (state: RootState) => state.task.tasks;
+export const modalTaskFlg = (state: RootState) => state.task.modalTaskFlg;
+export const clickedTaskId = (state: RootState) => state.task.clickedTaskId;
 
 export default taskSlice.reducer;
