@@ -7,3 +7,34 @@
   position: relative;
   top: 10vh;
 }
+.task_field {
+  display: flex;
+  justify-content: space-around;
+  border: $border_default;
+  margin-top: $space_l;
+  min-height: 50vh;
+  position: relative;
+  border-right: none;
+}
+.task_column {
+  width: calc(100%/3);
+  border-right: $border_default;
+}
+.hide {
+  display: none;
+}
+.no_task_msg {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: $space_2l;
+  background-color: rgba(230, 230, 230, 0.8);
+}
+.subtitle {
+  padding: $space_s;
+  text-align: center;
+  border-bottom: $border_default;
+}
+.task_wrapper {
+  padding: $space_s;
+}

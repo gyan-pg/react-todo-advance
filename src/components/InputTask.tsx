@@ -1,45 +1,47 @@
 import React, { useState } from "react";
+import { FirstPhase } from "../status";
+
+// redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../features/userSlice";
-import { setTasks } from "../features/taskSlice";
-
+import { exCreateTask } from "../features/taskSlice";
+// style
 import styles from "../scss/InputTask.module.scss";
-import { db } from "../firebase";
-import { addDoc, collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+
 
 const InputTask: React.FC = () => {
   const dispatch = useDispatch();
   const [task, setTask] = useState("");
+  const [detail, setDetail] = useState("");
   const user = useSelector(selectUser);
 
   const submitTask = async () => {
-    const colRef = collection(db, 'tasks');
-    const data = {
+    dispatch(exCreateTask({
       user: user.displayName,
       uid: user.uid,
       title: task,
-      status: 'not starting'
-    };
-    await addDoc(colRef, data);
-    setTask("");
-  }
-
-  // 全件取得
-  // taskSliceに受け渡し
-  const getTask = async () => {
-    const tasks = await getDocs(collection(db, "tasks"));
-    let taskArr: object[] = [];
-    tasks.forEach((task) => {
-      taskArr.push(task.data());
-    })
-    dispatch(setTasks(taskArr));
-  }
+      detail: detail,
+      status: FirstPhase
+    }));
+  };
 
   return (
     <div>
-      <input className={styles.input} value={task} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTask(e.target.value)}/>
-      <button className={styles.submit_button} onClick={submitTask}>submit</button>
-      <button className={styles.submit_button} onClick={getTask}>get</button>
+      <label htmlFor="title">タイトル</label>
+      <input className={styles.input}
+             id="title"
+             value={task}
+             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTask(e.target.value)}/>
+      <label htmlFor="detail">詳細</label>
+      <input className={styles.input}
+             id="detail"
+             value={detail}
+             placeholder="未入力可"
+             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDetail(e.target.value)}/>
+      
+      <button className={task.length > 0 ? styles.submit_button : styles.submit_button__not}
+              onClick={submitTask}
+              disabled={task.length > 0 ? false : true}>登録</button>
     </div>
   );
 };

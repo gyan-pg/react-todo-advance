@@ -10,4 +10,8 @@
 .submit_button {
   padding: $space_s;
   border: $border_default;
+  &__not {
+    @extend .submit_button;
+    background: #aaa;
+  }
 }

@@ -1,50 +1,56 @@
-import React, { useState } from "react";
-
-// firebase
-import { db } from "../firebase";
-import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import React from "react";
+// redux
+import { useDispatch } from "react-redux";
+import { exDeleteTask, exChangeStatus, exSetClickedTaskId, exSetModalTaskFlg } from "../features/taskSlice";
 // style
 import styles from "../scss/Task.module.scss";
+// const
+import { ThirdPhase } from "../status";
 
 interface TASK {
-  id: string,
-  uid: string,
-  title: string,
-  username: string,
-  status: string
+  id: string;
+  uid: string;
+  title: string;
+  detail: string;
+  username: string;
+  status: string;
 }
 
 const Task: React.FC<TASK> = (props) => {
 
-  const {id, title, status} = props;
-
-  // タスクの消去
-  const deleteTask = async () => {
-    console.log('delete');
-    console.log(id);
-    await deleteDoc(doc(db, "tasks", id));
+  const {id, title, status, detail} = props;
+  
+  const dispatch = useDispatch();
+  
+  // タスクの削除
+  const deleteTask = () => {
+    dispatch(exDeleteTask({uid: id}))
   };
 
   // ステータスの更新
-  const statusChange = async () => {
-    console.log("status change");
-    let newStatus = "";
-    if (status === "not starting") newStatus = "processing";
-    if (status === "processing") newStatus = "complete";
-
-    const taskRef = doc(db, "tasks", id);
-
-    await updateDoc(taskRef, {
-      status: newStatus,
-    });
+  const changeStatus = () => {
+    dispatch(exChangeStatus({
+      id,
+      status,
+    }));
+  };
+  // クリックしたタスクのIDを通知
+  const setClickedTaskId = () => {
+    dispatch(exSetClickedTaskId({id}));
+    dispatch(exSetModalTaskFlg());
   }
 
   return (
-    <div className={styles.wrapper}>
-      <p>title:{title}</p>
-      <p>status:{status}</p>
+    <div className={styles.wrapper} onClick={setClickedTaskId}>
+      <div className={styles.task_card}>
+        <p>title:{title}</p>
+        <p>status:{status}</p>
+        <p>detail:{detail}</p>
+      </div>
       <button className={styles.button} onClick={deleteTask}>delete</button>
-      <button className={styles.button} onClick={statusChange} disabled={status === "complete" ? true : false}>statusChange</button>
+      <button className={status === ThirdPhase ? styles.button_finish : styles.button}
+              onClick={changeStatus}
+              disabled={status === ThirdPhase ? true : false}>statusChange</button>
     </div>
   )
 };

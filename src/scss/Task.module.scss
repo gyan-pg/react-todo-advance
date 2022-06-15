@@ -1,16 +1,29 @@
 @import "./Reset.scss";
 @import "./Variables.scss";
 
-.wrapper {
-
+.task_card {
+  position: relative;
+  padding: $space_xs;
+  border: $border_default;
+  border-radius: 5px;
+  &:hover {
+    cursor: pointer;
+    color: #999;
+  }
 }
 
 .button {
+  position: relative;
+  z-index: 1;
   background: green;
   color: white;
   padding: $space_xs;
   margin-right: $space_xs;
+  &_finish {
+    display: none;
+  }
   &:hover {
     cursor: pointer;
+    background: limegreen;
   }
 }

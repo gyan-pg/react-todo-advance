@@ -1,0 +1,37 @@
+@import "./Reset.scss";
+@import "./Variables.scss";
+
+.modal_show {
+  display: block;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.8);
+  animation: fade linear 0.5s forwards;
+}
+.modal_hidden {
+  display: none;
+}
+
+.modal_body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  width: 30vw;
+  height: 30vh;
+  z-index: 20;
+}
+
+@keyframes fade {
+  0% {opacity: 0}
+  100% {opacity: 1}
+};
+@keyframes fadeOut {
+  0% {opacity: 1}
+  100% {opacity: 0}
+};
