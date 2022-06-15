@@ -23,6 +23,8 @@ const InputTask: React.FC = () => {
       detail: detail,
       status: FirstPhase
     }));
+    setTask("");
+    setDetail("");
   };
 
   return (

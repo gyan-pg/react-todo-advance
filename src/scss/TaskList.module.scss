@@ -3,6 +3,7 @@
 
 .wrapper {
   width: 50vw;
+  min-width: 900px;
   margin: 0 auto;
   position: relative;
   top: 10vh;
@@ -34,6 +35,18 @@
   padding: $space_s;
   text-align: center;
   border-bottom: $border_default;
+  &__not_start {
+    background-color: $color_main;
+    color: white;
+  }
+  &__processing {
+    background-color: $color_accent2;
+    color: white;
+  }
+  &__complete {
+    background-color: $color_sub;
+    color: white;
+  }
 }
 .task_wrapper {
   padding: $space_s;

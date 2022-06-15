@@ -80,7 +80,7 @@ const TaskList = () => {
       <InputTask />
       <div className={styles.task_field}>
         <div className={styles.task_column}>
-          <h3 className={styles.subtitle}>未着手</h3>
+          <h3 className={`${styles.subtitle} ${styles.subtitle__not_start}`}>未着手</h3>
           <div className={styles.task_wrapper}>
           {notStartingTask.map((task: TASK) => 
               <Task key={task.id}
@@ -96,7 +96,7 @@ const TaskList = () => {
           </div>
         </div>
         <div className={styles.task_column}>
-          <h3 className={styles.subtitle}>処理中</h3>
+          <h3 className={`${styles.subtitle} ${styles.subtitle__processing}`}>処理中</h3>
           <div className={styles.task_wrapper}>
           {processingTask.map((task: TASK) => 
               <Task key={task.id}
@@ -112,7 +112,7 @@ const TaskList = () => {
           </div>
         </div>
         <div className={styles.task_column}>
-          <h3 className={styles.subtitle}>完了</h3>
+          <h3 className={`${styles.subtitle} ${styles.subtitle__complete}`}>完了</h3>
           <div className={styles.task_wrapper}>
           {completeTask.map((task: TASK) => 
               <Task key={task.id}

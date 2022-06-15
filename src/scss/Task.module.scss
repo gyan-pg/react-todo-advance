@@ -1,29 +1,58 @@
 @import "./Reset.scss";
 @import "./Variables.scss";
 
+.wrapper {
+  position: relative;
+  margin-bottom: $space_s;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
 .task_card {
   position: relative;
-  padding: $space_xs;
   border: $border_default;
   border-radius: 5px;
-  &:hover {
-    cursor: pointer;
-    color: #999;
+  display: flex;
+  justify-content: space-between;
+  &__left {
+    flex-grow: 1;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &__title , &__body {
+    line-height: 26px;
+  }
+  &__title {
+    text-align: center;
+    color: #666;
+    font-size: $fontsize_sm;
+    background: $color_sub;
+    border-radius: 4px 0 0 0;
+  }
+  &__body {
+    font-size: $fontsize_sm;
+    padding: 0 $space_s;
   }
 }
 
 .button {
   position: relative;
-  z-index: 1;
-  background: green;
+  background: $color_accent1;
   color: white;
-  padding: $space_xs;
-  margin-right: $space_xs;
+  width: 30px;
+  text-align: center;
+  border-left: 1px solid white;
+  height:100%;
   &_finish {
     display: none;
   }
   &:hover {
     cursor: pointer;
-    background: limegreen;
+    background: $color_accent1_hover;
+  }
+  &:last-child {
+    border-radius: 0 4px 4px 0;
   }
 }

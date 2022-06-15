@@ -28,7 +28,7 @@ const ModalTaskDetail = () => {
   }
 
   return (
-    <section className={taskFlg ? styles.modal_show : styles.modal_hidden } onClick={modalClose}>
+    <section id="modal" className={taskFlg ? styles.modal_show : styles.modal_hidden } onClick={modalClose}>
       <div className={styles.modal_body} onClick={(e: any) => e.stopPropagation()}>
         {clickedTask
         ? <>
