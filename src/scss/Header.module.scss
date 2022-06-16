@@ -1,0 +1,17 @@
+@import "./Reset.scss";
+@import "./Variables.scss";
+
+.header {
+  height: $height_header;
+  line-height: $height_header;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  background: $color_accent1;
+  &_left {
+    margin-left: 10vw;
+  }
+  &_right {
+    margin-right: 10vw;
+  }
+}

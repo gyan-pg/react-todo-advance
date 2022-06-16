@@ -1,0 +1,10 @@
+@import "./Reset.scss";
+@import "./Variables.scss";
+
+.footer {
+  height: $height_footer;
+  line-height: $height_footer;
+  text-align: center;
+  background-color: $color_accent1;
+  color: white;
+}
