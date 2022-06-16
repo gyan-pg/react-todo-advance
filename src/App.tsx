@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react';
+// redux
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser, login, logout } from './features/userSlice';
 import { auth } from './firebase';
+// firebase
 import { onAuthStateChanged } from 'firebase/auth';
-
-import './App.css';
+// styles
+import styles from "./scss/App.module.scss";
+// component
 import TaskList from './components/TaskList';
 import Auth from './components/Auth';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const App: React.FC = () => {
   const user = useSelector(selectUser);
@@ -31,11 +36,16 @@ const App: React.FC = () => {
 
   return (
     <>
-      {user.uid ? (
-        <div>
-          <TaskList />
-        </div>
-      ) : <Auth />}
+    <Header />
+      <main className={styles.main_wrap}>
+        {user.uid ? (
+          <div>
+            <TaskList />
+          </div>
+        ) 
+        : <Auth />}
+      </main>
+    <Footer />
     </>
   );
 }

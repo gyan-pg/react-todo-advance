@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-// firebase
 import { RootState } from '../app/store';
+// firebase
 import { db } from "../firebase";
 import { doc, deleteDoc, updateDoc, addDoc, collection } from "firebase/firestore";
 // const
@@ -12,7 +11,8 @@ interface TASK {
   uid: string,
   title: string,
   username: string,
-  status: string
+  status: string,
+  weight: string
 }
 
 export const taskSlice = createSlice({
@@ -35,7 +35,8 @@ export const taskSlice = createSlice({
         uid: action.payload.uid,
         title: action.payload.title,
         detail: action.payload.detail,
-        status: action.payload.status
+        status: action.payload.status,
+        weight: action.payload.weight,
       };
       addDoc(colRef, data);
     },

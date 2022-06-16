@@ -2,16 +2,67 @@
 @import "./Variables.scss";
 
 .input {
-  padding: $space_s;
-  width: 50vw;
-  border: $border_default;
+  padding: $space_xs $space_s;
+  width: 100%;
+  border-bottom: $border_default;
   display: block;
 }
+.input_title {
+  padding: $space_xs $space_s;
+  border-bottom: $border_default;
+  width: 50%;
+}
+.select {
+  padding: $space_xs $space_s;
+  padding-left: $space_l;
+  margin-left: $space_s;
+  border-bottom: $border_default;
+  &_title {
+    margin-left: $space_l;
+  }
+  &_wrap {
+    position: relative;
+    &:after {
+      position: absolute;
+      z-index: -1;
+      top: 30%;
+      left: 15%;
+      content: "";
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-bottom: 2px solid #999;
+      border-right: 2px solid #999;
+      transform: rotate(45deg);
+    }
+  }
+}
+.label_textarea {
+  display: inline-block;
+  padding: $space_xs;
+}
 .submit_button {
-  padding: $space_s;
+  display: inline-block;
+  margin-left: $space_2l;
+  padding: $space_xs $space_s;
   border: $border_default;
+  font-size: $fontsize_sm;
+  border-radius: 5px;
   &__not {
-    @extend .submit_button;
     background: #aaa;
   }
+}
+.form_wrap {
+  min-width: 50vw;
+  padding: $space_m;
+}
+.form_multi_column {
+  display: flex;
+  margin-bottom: $space_m;
+  align-items: center;
+  justify-content: space-between;
+}
+.form_double_column {
+  align-items: center;
+  display: flex;
 }

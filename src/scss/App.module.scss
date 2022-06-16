@@ -1,0 +1,7 @@
+@import "./Reset.scss";
+@import "./Variables.scss";
+
+.main_wrap {
+  position: relative;
+  min-height: calc(100vh - 120px);
+}

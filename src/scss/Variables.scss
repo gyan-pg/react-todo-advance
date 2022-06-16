@@ -5,6 +5,9 @@ body {
   font-size: 1.6rem;
   color: #333;
 }
+svg {
+  vertical-align: middle;
+}
 // color
 $color_main: #FF6B6B;
 $color_sub: #FFD93D;
@@ -29,3 +32,7 @@ $fontsize_l: 2.5rem;
 $fontsize_2l: 3rem;
 
 $border_default: 1px solid #999;
+
+// height
+$height_header: 60px;
+$height_footer: 60px;

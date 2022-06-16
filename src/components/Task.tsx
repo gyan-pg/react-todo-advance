@@ -2,6 +2,7 @@ import React from "react";
 // icons
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaArrowAltCircleRight } from "react-icons/fa";
+import { AiOutlineSmile, AiOutlineCoffee, AiOutlineThunderbolt } from "react-icons/ai";
 // redux
 import { useDispatch } from "react-redux";
 import { exDeleteTask, exChangeStatus, exSetClickedTaskId, exSetModalTaskFlg } from "../features/taskSlice";
@@ -17,14 +18,15 @@ interface TASK {
   detail: string;
   username: string;
   status: string;
+  weight: string;
 }
 
 const Task: React.FC<TASK> = (props) => {
 
-  const {id, title, status} = props;
+  const {id, title, status, weight} = props;
 
   // taskの進行状況によって、スタイルを切り替える。
-  const checkStatus = () => { 
+  const checkStatus = () => {
       switch (status) {
       case "not starting":
         return styles.task_card__title_not_start;
@@ -35,7 +37,20 @@ const Task: React.FC<TASK> = (props) => {
     }
   }
 
+  // weightに応じたアイコンを代入する。
+  const checkIcon = () => {
+    switch (weight) {
+      case "low" :
+        return <AiOutlineCoffee/>;
+      case "middle" :
+        return <AiOutlineSmile/>;
+      case "high" :
+        return <AiOutlineThunderbolt/>;
+    }
+  }
+
   const titleStyle = checkStatus();
+  const icon = checkIcon()
 
   const dispatch = useDispatch();
   
@@ -55,14 +70,22 @@ const Task: React.FC<TASK> = (props) => {
   const setClickedTaskId = () => {
     dispatch(exSetClickedTaskId({id}));
     dispatch(exSetModalTaskFlg());
-  }
+  };
+  // タスクのタイトルが長い時にトリミング
+  const checkTitleLength = (str: string) => {
+    if (str.length > 15) {
+      return str.substring(0, 14) + "...";
+    } else {
+      return str;
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.task_card}>
         <div className={styles.task_card__left} onClick={setClickedTaskId}>
-          <h3 className={`${styles.task_card__title} ${titleStyle}`}>task</h3>
-          <p className={styles.task_card__body}>{title}</p>
+          <h3 className={`${styles.task_card__title} ${titleStyle}`}>task<span className={styles.icon}>{icon}</span></h3>
+          <p className={styles.task_card__body}>{checkTitleLength(title)}</p>
         </div>
         <div className={styles.task_card__right}>
           <button className={styles.button} onClick={deleteTask}><RiDeleteBin6Line /></button>

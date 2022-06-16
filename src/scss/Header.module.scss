@@ -15,3 +15,18 @@
     margin-right: 10vw;
   }
 }
+.logout {
+  border-radius: 50%;
+  padding: $space_s;
+  margin-left: $space_m;
+  &:hover {
+    cursor: pointer;
+    background: $color_accent1_hover;
+  }
+  & > svg {
+    position: relative;
+    top: -2px;
+  }
+}
+.username {
+}

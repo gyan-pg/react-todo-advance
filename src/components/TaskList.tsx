@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // components
 import InputTask from "./InputTask";
 import Task from "./Task";
@@ -11,10 +11,12 @@ import { selectTasks, exSetTasks } from "../features/taskSlice";
 import { FirstPhase, SecondPhase, ThirdPhase } from "../status";
 // style
 import styles from "../scss/TaskList.module.scss";
+// icons
+import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
+import { CgCloseR } from "react-icons/cg";
 // firebase
 import { auth, db } from "../firebase";
-import { signOut } from "firebase/auth";
-import { collection, onSnapshot, getDocs, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 
 interface TASK {
   id: string;
@@ -23,10 +25,12 @@ interface TASK {
   detail: string;
   username: string;
   status: string;
+  weight: string;
 }
 
 
 const TaskList = () => {
+  const [showInput, setShowInput] = useState(false);
   const user = useSelector(selectUser);
   const taskList = useSelector(selectTasks);
   const dispatch = useDispatch();
@@ -65,7 +69,8 @@ const TaskList = () => {
           detail: data.detail,
           status: data.status,
           user: data.user,
-          uid: data.uid
+          uid: data.uid,
+          weight: data.weight
         });
       });
       dispatch(exSetTasks(tasks));
@@ -77,7 +82,6 @@ const TaskList = () => {
 
   return ( 
     <div className={styles.wrapper}>
-      <InputTask />
       <div className={styles.task_field}>
         <div className={styles.task_column}>
           <h3 className={`${styles.subtitle} ${styles.subtitle__not_start}`}>未着手</h3>
@@ -90,6 +94,7 @@ const TaskList = () => {
                 detail={task.detail}
                 username={task.username}
                 status={task.status}
+                weight={task.weight}
               />
             )
           }
@@ -106,6 +111,7 @@ const TaskList = () => {
                 detail={task.detail}
                 username={task.username}
                 status={task.status}
+                weight={task.weight}
               />
             )
           }
@@ -122,16 +128,19 @@ const TaskList = () => {
                 detail={task.detail}
                 username={task.username}
                 status={task.status}
+                weight={task.weight}
               />
             )
           }
           </div>
         </div>
-        <div className={taskList.length ? styles.hide : styles.no_task_msg }>タスクが登録されていません。何か登録してみましょう！</div>
+        <div className={taskList.length ? styles.hide : styles.no_task_msg }><p className={styles.no_task_msg_inner}>タスクが登録されていません。何か登録してみましょう！</p></div>
       </div>
       <br/>
-      <p>こんにちは。{user.displayName}さん。</p>
-      <button onClick={() => signOut(auth)}>sign out</button>
+      <div className={styles.button_container}>
+        <button className={styles.button} onClick={() => {setShowInput(!showInput)}}>{showInput ? <AiOutlineMinusSquare/> : <AiOutlinePlusSquare/>}</button>
+      </div>
+      {showInput ? <InputTask /> : ""}
       <ModalTaskDetail />
     </div>
   );

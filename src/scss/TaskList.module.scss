@@ -6,13 +6,12 @@
   min-width: 900px;
   margin: 0 auto;
   position: relative;
-  top: 10vh;
+  padding-top: 10vh;
 }
 .task_field {
   display: flex;
   justify-content: space-around;
   border: $border_default;
-  margin-top: $space_l;
   min-height: 50vh;
   position: relative;
   border-right: none;
@@ -28,8 +27,15 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  padding: $space_2l;
-  background-color: rgba(230, 230, 230, 0.8);
+  height: 50%;
+  width: 50%;
+  background-color: rgba(240, 240, 240, 0.8);
+  &_inner {
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 .subtitle {
   padding: $space_s;
@@ -50,4 +56,14 @@
 }
 .task_wrapper {
   padding: $space_s;
+}
+.button {
+  font-size: $fontsize_l;
+  display: inline-block;
+  &:hover {
+    color: $color_accent2;
+  }
+  &_container {
+    text-align: center;
+  }
 }

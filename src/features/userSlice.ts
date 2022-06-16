@@ -14,11 +14,13 @@ export const userSlice = createSlice({
       photoUrl: "",
       displayName: "",
     },
+    isLogin: false,
   },
 
   reducers: {
     login: (state, action) => {
       state.user = action.payload;
+      state.isLogin = true;
     },
     logout: (state) => {
       state.user = {
@@ -26,6 +28,7 @@ export const userSlice = createSlice({
         photoUrl: "",
         displayName: "",
       };
+      state.isLogin = false;
     },
     updateUserProfile: (state, action: PayloadAction<USER>) => {
       state.user.displayName = action.payload.displayName;
@@ -38,5 +41,6 @@ export const userSlice = createSlice({
 export const { login, logout, updateUserProfile } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user.user;
+export const isLogin = (state: RootState) => state.user.isLogin;
 
 export default userSlice.reducer;

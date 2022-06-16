@@ -8,7 +8,9 @@
     margin-bottom: 0;
   }
 }
-
+.icon {
+  margin-left: $space_s;
+}
 .task_card {
   position: relative;
   border: $border_default;
