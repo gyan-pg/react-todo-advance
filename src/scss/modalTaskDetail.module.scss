@@ -9,7 +9,7 @@
   top: 0;
   left: 0;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(80, 80, 80, 0.8);
   animation: fade linear 0.5s forwards;
 }
 .modal_hidden {
@@ -17,14 +17,38 @@
 }
 
 .modal_body {
+  border-radius: 20px;
+  padding: $space_l;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
   width: 30vw;
-  height: 30vh;
   z-index: 20;
+}
+
+.task_title {
+  font-size: $fontsize_ml;
+  padding-bottom: $space_xs;
+  border-bottom: $border_default;
+  margin-bottom: $space_s;
+}
+.task_detail {
+  display: inline-block;
+  margin-top: $space_m;
+  margin-bottom: $space_xs;
+  padding: 0 $space_s;
+  padding-bottom: $space_xs;
+  border-bottom: $border_default;
+}
+.button_close {
+  display: block;
+  position: absolute;
+  top: -35px;
+  right: 0;
+  font-size: $fontsize_l;
+  color: white;
 }
 
 @keyframes fade {

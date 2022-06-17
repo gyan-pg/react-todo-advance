@@ -4,7 +4,7 @@ import styles from "../scss/Footer.module.scss";
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      footer
+      TASK LIST made by TH
     </footer>
   );
 };

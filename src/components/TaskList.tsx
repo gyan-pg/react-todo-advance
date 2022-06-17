@@ -82,6 +82,7 @@ const TaskList = () => {
 
   return ( 
     <div className={styles.wrapper}>
+      <h2 className={styles.title}>Task List</h2>
       <div className={styles.task_field}>
         <div className={styles.task_column}>
           <h3 className={`${styles.subtitle} ${styles.subtitle__not_start}`}>未着手</h3>

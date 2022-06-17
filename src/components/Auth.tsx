@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+// redux
 import { useDispatch } from "react-redux";
 import { updateUserProfile } from "../features/userSlice";
+// firebase
 import { auth, provider} from "../firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
+// styles
 import styles from "../scss/Auth.module.scss";
+// icon
+import { BsArrowClockwise } from "react-icons/bs";
 
 const Auth: React.FC = () => {
   const dispatch = useDispatch();
@@ -34,7 +39,7 @@ const Auth: React.FC = () => {
 
 
   const signInGoogle = async () => {
-    await signInWithPopup(auth, provider).catch((err) => alert(err.message));
+    await signInWithPopup(auth, provider).catch((err) => console.log(err.message));
   }
 
   const signInEmail = async () => {
@@ -63,11 +68,11 @@ const Auth: React.FC = () => {
       <h1 className={styles.title}>{isLogin ? "LOGIN" : "REGISTER"}</h1>
         {isLogin ? "" : (
           <>
-            <label htmlFor="username">user name</label>
             <input id="username"
                   className={styles.input}
                   type="text"
                   name="username"
+                  placeholder="name"
                   value={username} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     const str = e.target.value;
                     setUsername(str);
@@ -77,11 +82,11 @@ const Auth: React.FC = () => {
           </>
         )}
         
-        <label htmlFor="email">email</label>
         <input id="email"
                className={styles.input}
                type="text"
                name="email"
+               placeholder="email"
                value={email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                  const str = e.target.value;
                  setEmail(str);
@@ -89,11 +94,11 @@ const Auth: React.FC = () => {
                 }}
         />
 
-        <label htmlFor="password">password</label>
         <input id="password"
                className={styles.input}
                type="password"
                name="password"
+               placeholder="password"
                value={password}
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                  const str = e.target.value;
@@ -101,31 +106,32 @@ const Auth: React.FC = () => {
                  validForm(email, str);
                 }}
         />
-
-        <button className={validFlg ? styles.login_button__disable : styles.login_button}
-                disabled={validFlg}
-                onClick={
-                  isLogin
-                    ? async () => {
-                      try {
-                        await signInEmail();
-                      } catch (err: any) {
-                        alert(err.message);
+        <div className={styles.button_container}>
+          <button className={validFlg ? styles.login_button__disable : styles.login_button}
+                  disabled={validFlg}
+                  onClick={
+                    isLogin
+                      ? async () => {
+                        try {
+                          await signInEmail();
+                        } catch (err: any) {
+                          alert(err.message);
+                        }
                       }
-                    }
-                    : async () => {
-                      try {
-                        await signUpEmail();
-                      } catch (err: any) {
-                        alert(err.message);
+                      : async () => {
+                        try {
+                          await signUpEmail();
+                        } catch (err: any) {
+                          alert(err.message);
+                        }
                       }
-                    }
-                }
-        >
-          {isLogin ? "login" : "signIn"}
-        </button>
-        <button className={styles.login_button} onClick={signInGoogle}>Google</button>
-      <span onClick={() => setIsLogin(!isLogin)}>{isLogin ? "SignIn?" : "Login?"}</span>
+                  }
+          >
+            {isLogin ? "Login" : "SignIn"}
+          </button>
+          <button className={styles.login_button} onClick={signInGoogle}>Google</button>
+        </div>
+      <button className={styles.change_form} onClick={() => setIsLogin(!isLogin)}><span className={styles.login_icon}><BsArrowClockwise/></span>{isLogin ? "SignIn" : "Login"}</button>
     </div>
   );
 };

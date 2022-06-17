@@ -5,30 +5,50 @@
   position: relative;
   margin: 0 auto;
   width: 500px;
-  top: 20vh;
-  background: #eee;
+  top: 10vh;
 }
 .input {
   width: 100%;
   display: block;
-  border: $border_default;
-  padding: $space_s $space_m;
-  margin-bottom: $space_m;
+  border-bottom: $border_default;
+  padding: $space_xs $space_s;
+  margin-bottom: $space_l;
+  &:last-of-type {
+     margin-bottom: $space_2l;
+  }
 }
 .title {
   text-align: center;
   font-size: $fontsize_2l;
+  margin-bottom: $space_2l;
 }
 .login_button {
-  display: block;
+  display: inline-block;
   width: 100%;
   text-align: center;
-  background: #ababff;
+  background: $color_accent2;
   color: white;
   padding: $space_s;
-  margin-bottom: $space_sm;
+  margin-bottom: $space_m;
+  &:hover {
+    background: $color_accent2_hover;
+  }
   &__disable {
     @extend .login_button;
     background: #aaa;
+    &:hover {
+      background: #aaa;
+    }
+  }
+}
+.login_icon {
+  margin-right: $space_s;
+}
+.button_container {
+  text-align: center;
+}
+.change_form {
+  &:hover {
+    color: $color_accent2;
   }
 }

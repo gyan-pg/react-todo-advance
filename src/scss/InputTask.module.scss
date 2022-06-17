@@ -48,13 +48,20 @@
   border: $border_default;
   font-size: $fontsize_sm;
   border-radius: 5px;
+  &:hover {
+    opacity: 0.8;
+  }
   &__not {
     background: #aaa;
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 .form_wrap {
   min-width: 50vw;
   padding: $space_m;
+  padding-bottom: $space_2l;
 }
 .form_multi_column {
   display: flex;

@@ -17,7 +17,7 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.header_left}>APP NAME</div>
+      <div className={styles.header_left}>TASK LIST APP</div>
       <div className={styles.header_right}>
         <span className={styles.username}>{loginState ? user.displayName : ""}</span>
         {loginState ? (
