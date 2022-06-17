@@ -50,6 +50,78 @@
   font-size: $fontsize_l;
   color: white;
 }
+.button_edit {
+  margin-left: $space_s;
+}
+.button_update {
+  border: $border_default;
+  background: white;
+  position: absolute;
+  bottom: -50px;
+  right: 0;
+  font-size: $fontsize_sm;
+  padding: $space_xs $space_m;
+  border-radius: 10px;
+  &.disable {
+    background: #999;
+    &:hover {
+      cursor: auto;
+    }
+  }
+}
+.edit {
+  &:hover {
+    color: $color_accent1;
+  }
+}
+.input {
+  width: 100%;
+  font-size: $fontsize_ml;
+  padding-bottom: $space_xs;
+  border-bottom: $border_default;
+  margin-bottom: $space_s;
+  &_container {
+    position: relative;
+  }
+  &_finish {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: $fontsize_ml;
+    &:hover {
+      color: $color_accent1;
+    }
+  }
+}
+.select {
+  padding-left: $space_m;
+  &_container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    &:after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-bottom: 2px solid #999;
+      border-right: 2px solid #999;
+      position: absolute;
+      top: 25%;
+      left: 13%;
+      transform: rotate(45deg);
+    }
+  }
+}
+.textarea {
+  display: block;
+  resize: none;
+  width: 100%;
+  min-height: 24px;
+}
+.detail {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 
 @keyframes fade {
   0% {opacity: 0}

@@ -6,16 +6,15 @@ import ModalTaskDetail from "./ModalTaskDetail";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../features/userSlice";
-import { selectTasks, exSetTasks } from "../features/taskSlice";
+import { selectTasks, exSetTasks, modalTaskFlg } from "../features/taskSlice";
 // const
 import { FirstPhase, SecondPhase, ThirdPhase } from "../status";
 // style
 import styles from "../scss/TaskList.module.scss";
 // icons
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
-import { CgCloseR } from "react-icons/cg";
 // firebase
-import { auth, db } from "../firebase";
+import { db } from "../firebase";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 
 interface TASK {
@@ -33,6 +32,7 @@ const TaskList = () => {
   const [showInput, setShowInput] = useState(false);
   const user = useSelector(selectUser);
   const taskList = useSelector(selectTasks);
+  const modalFlg = useSelector(modalTaskFlg);
   const dispatch = useDispatch();
 
   // taskListの振り分け
@@ -142,7 +142,7 @@ const TaskList = () => {
         <button className={styles.button} onClick={() => {setShowInput(!showInput)}}>{showInput ? <AiOutlineMinusSquare/> : <AiOutlinePlusSquare/>}</button>
       </div>
       {showInput ? <InputTask /> : ""}
-      <ModalTaskDetail />
+      {modalFlg ? <ModalTaskDetail /> : ""}
     </div>
   );
 };

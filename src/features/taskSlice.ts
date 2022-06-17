@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 // firebase
 import { db } from "../firebase";
-import { doc, deleteDoc, updateDoc, addDoc, collection } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc, addDoc, collection, setDoc } from "firebase/firestore";
 // const
 import { FirstPhase, SecondPhase, ThirdPhase } from "../status";
 
@@ -55,6 +55,10 @@ export const taskSlice = createSlice({
         status: newStatus,
       });
     },
+    exUpdateTask: (state, action) => {
+      const taskRef = doc(db, "tasks", action.payload.id);
+      setDoc(taskRef, action.payload);
+    },
     exSetModalTaskFlg: (state) => {
       state.modalTaskFlg = !state.modalTaskFlg;
     },
@@ -65,7 +69,7 @@ export const taskSlice = createSlice({
 });
 
 // actionsはreducersの中身をexportする。ついでにaction creatorの役割も担っている。
-export const { exSetTasks, exCreateTask, exDeleteTask, exChangeStatus, exSetClickedTaskId, exSetModalTaskFlg } = taskSlice.actions;
+export const { exSetTasks, exCreateTask, exDeleteTask, exChangeStatus, exSetClickedTaskId, exSetModalTaskFlg, exUpdateTask } = taskSlice.actions;
 
 export const selectTasks = (state: RootState) => state.task.tasks;
 export const modalTaskFlg = (state: RootState) => state.task.modalTaskFlg;
